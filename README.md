@@ -1,5 +1,22 @@
 # HTTP 心跳推送插件
 
+## KUMA配置
+
+1. **kuma状态查看设置**：在kuma主界面右上角点击“状态页面”——点击“新的状态页”——优雅填写名称和展示页地址——点击下一步——在新页面中点击“编辑页面”——填入标题和描述，然后选择屏幕中间的“添加监控项”把你刚刚优雅填写的名称输入进去，然后保存喵。然后分享当前所在的网址就可以和别人一起视奸你的bot了。
+
+## 安装
+
+1. 将插件目录放置到 `plugins/` 目录下
+2. 确保插件文件结构正确：
+   ```
+   plugins/http_heartbeat/
+   ├── plugin.py
+   ├── config.py
+   ├── manifest.json
+   └── __init__.py
+   ```
+3. 重启应用以加载插件
+
 ## 功能介绍
 
 HTTP 心跳推送插件用于定期向服务器发送 HTTP 心跳推送请求，使服务器了解应用程序的运行状态。
@@ -26,7 +43,7 @@ HTTP 心跳推送插件用于定期向服务器发送 HTTP 心跳推送请求，
 
 #### 推送配置（push）
 
-- **push_url** (string): 推送服务器 URL，示例：
+- **push_url** (string): 推送服务器 URL(从kuma获取)，示例：
   - `http://localhost:3001/api/push/token?status=up&msg=OK&ping=` - 本机
   - `http://192.168.1.100:9000/api/push/abc123?status=alive&ping=` - 局域网
   - URL 末尾会自动追加当前时间戳
@@ -78,6 +95,16 @@ enable_logging = true
 ✅ 在私网环境中建立应用与监控系统的连接  
 ✅ 作为 uptimerobot 等监控服务的替代方案
 
+## URL 参数获取以及使用
+
+1. **基本要求**：你先需要有一台公网服务器，并且已经优雅运行了kuma。
+2. **获取URL**：在kuma中，新建监控项——监控类型选择“Push”——然后复制推送URL（请记住这个URL并且不要尝试手动访问）——然后保存即可。
+3. **URL处理**：优雅运行neo主程序，等待生成配置文件后把推送URL粘贴进配置文件中。
+
+### 注意事项
+
+- 要确保kuma与插件配置文件中的“推送间隔”要一致，如果出现正常运行但是kuma报错，请在kuma中的监控项中增加失败重试。
+
 ## URL 参数说明
 
 示例 URL：`http://server:port/api/push/token?status=up&msg=OK&ping=`
@@ -122,7 +149,7 @@ http://server:port/api/push/token?status=up&msg=OK&ping=1710336282
 
 ## 版本信息
 
-- 版本：1.0.0
-- 作者：MoFox Studio
+- 版本：1.1.0
+- 作者：qf
 - 最低核心版本：1.0.0
 - 依赖：无（使用 Python 标准库）
