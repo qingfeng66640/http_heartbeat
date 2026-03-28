@@ -1,0 +1,15 @@
+{
+    "name": "http_heartbeat",
+    "version": "1.0.0",
+    "description": "HTTP 心跳推送插件，定期向本地私网服务器推送心跳",
+    "author": "MoFox Studio",
+    "dependencies": {
+        "plugins": [],
+        "components": []
+    },
+    "include": [],
+    "entry_point": "plugin.py",
+    "min_core_version": "1.0.0",
+    "python_dependencies": [],
+    "dependencies_required": false
+}
