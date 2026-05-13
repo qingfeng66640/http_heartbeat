@@ -16,7 +16,7 @@ class HttpHeartbeatConfig(BaseConfig):
     config_name: ClassVar[str] = "config"
     config_description: ClassVar[str] = "HTTP 心跳推送插件配置"
 
-    @config_section("plugin", title="插件设置", tag="plugin")
+    @config_section("plugin")
     class PluginSection(SectionBase):
         """插件基础配置。"""
 
@@ -28,7 +28,7 @@ class HttpHeartbeatConfig(BaseConfig):
             order=0
         )
 
-    @config_section("push", title="推送配置", tag="network")
+    @config_section("push")
     class PushSection(SectionBase):
         """心跳推送配置。"""
 
